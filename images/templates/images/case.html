@@ -5,7 +5,12 @@
 <p><strong>Tags: </strong>
 {% for tag in case.tags.all %}
 <a href={% url 'tag' tag %}>{{ tag }}</a>
-{% endfor %}
+{% endfor %}</p>
+
+<p><strong>Similar Cases: </strong>
+{% for case in case.tags.similar_objects %}
+<a href="{% url 'case' case.id %}">{{ case.title }}</a>
+{% endfor %}</p>
 
 <div class="row">
 {% for resource in resources %}

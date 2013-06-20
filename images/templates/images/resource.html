@@ -2,9 +2,16 @@
 
 {% block content %}
 <h2>{{ resource }}</h2>
+
 <p><strong>Tags: </strong>
 {% for tag in resource.tags.all %}
 <a href={% url 'tag' tag %}>{{ tag }}</a>
 {% endfor %}
+
+<p><strong>Similar Images: </strong>
+{% for resource in resource.tags.similar_objects %}
+<a href="{% url 'resource' resource.id %}">{{ resource }}</a>
+{% endfor %}</p>
+
 <img src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail">
 {% endblock %}

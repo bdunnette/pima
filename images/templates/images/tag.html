@@ -4,7 +4,11 @@
 <h2>{{ tag }}</h2>
 {% for item in tagged_items %}
 <div class="row">
-<a href="{% url item.content_type.name item.content_object.id %}">{{ item.content_object }}</a>
+<a href="{% url item.content_type.name item.content_object.id %}">{{ item.content_object }}
+{% if item.content_object.file %}
+<img src="{{ MEDIA_URL }}/{{ item.content_object.file }}" width=25% />
+{% endif %}
+</a>
 </div>
 {% endfor %}
 {% endblock %}
