@@ -10,8 +10,8 @@
 <div class="row">
 {% for resource in resources %}
 	<div class="span2">
-	{{ resource }}
-	<img width="200" src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail"/>
+	<a href="{% url 'resource' resource.id %}">{{ resource }}
+	<img width="200" src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail"/></a>
 	</div>
 {% endfor %}
 </div>
