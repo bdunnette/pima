@@ -1,0 +1,10 @@
+{% extends "images/base.html" %}
+
+{% block content %}
+<h2>{{ resource }}</h2>
+<p><strong>Tags: </strong>
+{% for tag in resource.tags.all %}
+<a href={% url 'tag' tag %}>{{ tag }}</a>
+{% endfor %}
+<img src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail">
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "images/base.html" %}
+
+{% block content %}
+Available Cases:
+<ul>
+{% for case in case_list %}
+	<li><a href="case/{{ case.id }}/">{{ case.title }}</a></li>
+{% endfor %}
+</ul>
+
+Tags:
+<ul>
+{% for tag in tag_list %}
+	<li><a href="tag/{{ tag }}/">{{ tag }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

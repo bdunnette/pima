@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load bootstrap_toolkit %}
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>PImA - The Pathology Image Archive</title>
+	<meta name="description" content="">
+	{% bootstrap_stylesheet_tag %}
+	{% bootstrap_stylesheet_tag "responsive" %}
+	<style type="text/css">
+        body {
+            padding-top: 60px;
+        }
+	</style>
+	<script src="{{ STATIC_URL }}js/jquery.js"></script>
+	{% bootstrap_javascript_tag %}
+    	{% block extra_head %}{% endblock %}
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="{{ URL_PREFIX }}">PImA - The Pathology Image Archive</a>
+            <ul class="nav">
+                <li><a href="{% url 'index' %}" class="">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    {% bootstrap_messages %}
+
+    {% block content %}{% endblock %}
+
+</div>
+
+</body>
+</html>
+

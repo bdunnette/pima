@@ -1,0 +1,18 @@
+{% extends "images/base.html" %}
+
+{% block content %}
+<h2>{{ case }}</h2>
+<p><strong>Tags: </strong>
+{% for tag in case.tags.all %}
+<a href={% url 'tag' tag %}>{{ tag }}</a>
+{% endfor %}
+
+<div class="row">
+{% for resource in resources %}
+	<div class="span2">
+	{{ resource }}
+	<img width="200" src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail"/>
+	</div>
+{% endfor %}
+</div>
+{% endblock %}
