@@ -1,0 +1,3 @@
+jquery
+django-bootstrap-toolkit
+django-taggit-autosuggest
