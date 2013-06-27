@@ -1,3 +1,6 @@
-jquery
+django-jquery
 django-bootstrap-toolkit
 django-taggit-autosuggest
+south
+# Uncomment if using MySQL
+#MySQL-python
