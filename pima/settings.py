@@ -1,6 +1,6 @@
 # Django settings for pima project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 URL_PREFIX = '/pima'
@@ -164,7 +164,7 @@ LOGGING = {
 }
 
 try:
-    from local_settings import *
+    from settings_local import *
 except ImportError:
     pass
 
