@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from images.models import Case, Resource
 import pprint
+from pyparsing import commaSeparatedList
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -15,7 +16,7 @@ def parse_js(js_file):
 	    var_name = line[3:].split()[0].lower()
 	    vars[var_name] = {}
 	else:
-	    vals = line.translate(None, "[]\t\n\r").split(",")
+	    vals = commaSeparatedList.parseString(line)
 	    if len(vals) > 1:
 	        data[vals[0]] = vals
     return vars
