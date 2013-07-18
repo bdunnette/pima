@@ -1,32 +1,49 @@
 from django.core.management.base import BaseCommand, CommandError
 from images.models import Case, Resource
-import json
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+
+def parse_js(js_file):
+    vars = {}
+    data = {}
+    var_name = ''
+    for line in js_file.readlines():
+        if line.strip()[:3] == 'var':
+	    vars[var_name] = data
+	    data = {}
+	    var_name = line[3:].split()[0].lower()
+	    vars[var_name] = {}
+	else:
+	    vals = line.translate(None, "[]\t\n\r").split(",")
+	    if len(vals) > 1:
+	        data[vals[0]] = vals
+    return vars
 
 class Command(BaseCommand):
     args = '<dir dir ...>'
     help = 'Imports images from the specified directories'
 
     def handle(self, *args, **options):
-	data = {}
-	data2 = {}
         for dir in args:
-	    var_name = ''
             try:
 		js_file = open('/'.join([dir, 'data.js']))
-		for line in js_file.readlines():
-		    print line
-	 	    if line.strip()[:3] == 'var':
-			data[var_name] = data2
-		        var_name = line[3:].split()[0]
-			data[var_name] = {}
-			data2 = {}
-		    else:
-			vals = line.translate(None,"{}[]\t\r\n").split(",")
-			if len(vals) > 1:
-			    print vals, var_name
-			    data2[vals[0].strip(" '")] = vals
-		for datum in data:
-		    print datum, data[datum]
+		vars = parse_js(js_file)
+		labs = {lab: vars[lab] for lab in vars if 'lab' in lab}
+		cases = {case: vars[case] for case in vars if 'case' in case}
+		for lab in labs:
+		    print lab, labs[lab]
+		    for case in enumerate(labs[lab]):
+			case_title = labs[lab][case[1]][1].strip()
+			case_id = labs[lab][case[1]][2].strip()
+			print case_title
+			if case_id in cases:
+			    case_info = cases[case_id]
+			    for image in case_info:
+				print image, case_info[image]
+			new_case, created = Case.objects.get_or_create(title=case_title)
+			if created:
+			    new_case.save()
 	    except Exception as inst:
 		print type(inst)     # the exception instance
 		print inst.args      # arguments stored in .args
