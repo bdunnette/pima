@@ -2,6 +2,7 @@
 *.pot
 *.pyc
 *.sqlite
+*.save
 settings_local.py
 media/
 static/

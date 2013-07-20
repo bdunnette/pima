@@ -39,12 +39,20 @@ class Command(BaseCommand):
 			case_id = labs[lab][case[1]][2].strip()
 			print case_title
 			if case_id in cases:
+    			    new_case, created = Case.objects.get_or_create(title=case_title)
+			    print new_case.resources
+			    if created:
+			        new_case.save()
 			    case_info = cases[case_id]
 			    for image in case_info:
 				print image, case_info[image]
-			new_case, created = Case.objects.get_or_create(title=case_title)
-			if created:
-			    new_case.save()
+				image_title = case_info[image][1].strip(" '")[:255]
+				new_image, created = Resource.objects.get_or_create(title=image_title)
+				if created:
+				    new_image.save()
+				case_resource, resource_created = new_case.resources.get_or_create(title=image_title)
+				if resource_created:
+				    new_case.save()
 	    except Exception as inst:
 		print type(inst)     # the exception instance
 		print inst.args      # arguments stored in .args
