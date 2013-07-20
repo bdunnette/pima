@@ -35,7 +35,7 @@ class Command(BaseCommand):
 		for lab in labs:
 		    print lab, labs[lab]
 		    for case in enumerate(labs[lab]):
-			case_title = labs[lab][case[1]][1].strip()
+			case_title = labs[lab][case[1]][1].strip(" '")
 			case_id = labs[lab][case[1]][2].strip()
 			print case_title
 			if case_id in cases:
