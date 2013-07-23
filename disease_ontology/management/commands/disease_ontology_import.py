@@ -1,8 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from disease_ontology.models import Term
 import pprint
-from rdflib import Graph
-from rdflib.namespace import OWL
 
 class Command(BaseCommand):
     args = '<dir dir ...>'
@@ -10,12 +8,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            g = Graph()
-            do_file = 'http://purl.obolibrary.org/obo/doid.owl'
-            print "Downloading and parsing %s, this may take a few minutes..." % do_file
-            result = g.parse(do_file, format='xml')
-            for r in result:
-                pprint.pprint(r)
+            do_file = open('disease_ontology/HumanDO.obo')
+            do_data = do_file.read().split('\n\n')
+            for datum in do_data:
+                datum_type = datum.split('\n')[0]
+                print datum_type
         except Exception as inst:
             print type(inst)     # the exception instance
             print inst.args      # arguments stored in .args
