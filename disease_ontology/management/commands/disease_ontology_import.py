@@ -4,8 +4,8 @@ import pprint
 
 def split_line(line):
     line_split = line.split(':', 1)
-    line_type = line_split[0]
-    line_val = line_split[1]
+    line_type = line_split[0].strip()
+    line_val = line_split[1].strip()
     return line_type, line_split
 
 class Command(BaseCommand):
