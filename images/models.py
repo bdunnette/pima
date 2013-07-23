@@ -6,12 +6,13 @@ from taggit_autosuggest.managers import TaggableManager
 # Create your models here.
 class Resource(models.Model):
 	file = models.FileField(upload_to='resources')
-	title = models.CharField(max_length=255, null=True, blank=True)
+	filename = models.CharField(max_length=255, unique=True, default='resource.xxx')
+	description = models.TextField(null=True, blank=True)
 	tags = TaggableManager(blank=True)
 
 	def __unicode__(self):
-		if self.title:
-			return self.title
+		if self.description:
+			return self.description
 		else:
 			return self.file.name
 

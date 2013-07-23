@@ -14,9 +14,9 @@
 
 <div class="row">
 {% for resource in resources %}
-	<div class="span2">
-	<a href="{% url 'resource' resource.id %}">{{ resource }}
-	<img width="200" src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail"/></a>
+	<div class="span3">
+	<a href="{% url 'resource' resource.id %}"><img width="200" src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail"/>
+	{{ resource }}</a>
 	</div>
 {% endfor %}
 </div>

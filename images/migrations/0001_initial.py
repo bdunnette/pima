@@ -12,7 +12,8 @@ class Migration(SchemaMigration):
         db.create_table(u'images_resource', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('filename', self.gf('django.db.models.fields.CharField')(default='resource.xxx', unique=True, max_length=255)),
+            ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'images', ['Resource'])
 
@@ -60,9 +61,10 @@ class Migration(SchemaMigration):
         },
         u'images.resource': {
             'Meta': {'object_name': 'Resource'},
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+            'filename': ('django.db.models.fields.CharField', [], {'default': "'resource.xxx'", 'unique': 'True', 'max_length': '255'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         u'taggit.tag': {
             'Meta': {'object_name': 'Tag'},
