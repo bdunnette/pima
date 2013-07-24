@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from taggit_autosuggest.managers import TaggableManager
+from disease_ontology.models import Term
 #from taggit.managers import TaggableManager
 
 # Create your models here.
@@ -19,6 +20,7 @@ class Resource(models.Model):
 class Case(models.Model):
 	title = models.CharField(max_length=100)
 	tags = TaggableManager(blank=True)
+	diagnosis = models.ManyToManyField(Term)
 	resources = models.ManyToManyField(Resource)
 
 	def __unicode__(self):

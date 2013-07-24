@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.core.files import File
+from django.core.exceptions import ObjectDoesNotExist
 from images.models import Case, Resource
+from disease_ontology.models import Term
 import pprint
 from pyparsing import commaSeparatedList
 
@@ -41,6 +43,11 @@ class Command(BaseCommand):
                         print case_title
                         if case_id in cases:
                             new_case, created = Case.objects.get_or_create(title=case_title)
+                            try:
+                                diagnosis_term = Term.objects.get(name=case_title.lower())
+                                new_case.diagnosis.add(diagnosis_term)
+                            except ObjectDoesNotExist:
+                                print("Diagnosis not found, skipping...")
                             #print new_case.resources
                             if created:
                                 new_case.save()

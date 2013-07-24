@@ -2,14 +2,12 @@
 
 {% block content %}
 <h2>{{ case }}</h2>
-<p><strong>Tags: </strong>
-{% for tag in case.tags.all %}
-<a href={% url 'tag' tag %}>{{ tag }}</a>
-{% endfor %}</p>
 
-<p><strong>Similar Cases: </strong>
-{% for case in case.tags.similar_objects %}
-<a href="{% url 'case' case.id %}">{{ case.title }}</a>
+<p>{% for diagnosis in diagnoses %}
+    {% for element in diagnosis.0 reversed %}
+    <a href="#">{{ element.0|title }}</a> > 
+    {% endfor %}
+    <a href="#">{{ diagnosis.1.0|title }}
 {% endfor %}</p>
 
 <div class="row">
