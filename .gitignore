@@ -4,6 +4,8 @@
 *.pyc
 *.sqlite
 *.save
+*.obo
+.DS_Store
 settings_local.py
 media/
 static/
