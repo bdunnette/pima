@@ -5,9 +5,9 @@
 
 <p>{% for diagnosis in diagnoses %}
     {% for element in diagnosis.0 reversed %}
-    <a href="#">{{ element.0|title }}</a> > 
+    <a href="{% url 'diagnosis' element.0 %}">{{ element.0|title }}</a> > 
     {% endfor %}
-    <a href="#">{{ diagnosis.1.0|title }}
+    <a href="{% url 'diagnosis' diagnosis.1.0 %}">{{ diagnosis.1.0|title }}
 {% endfor %}</p>
 
 <div class="row">

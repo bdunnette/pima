@@ -24,3 +24,7 @@ def tag(request, tag_name):
 	tagged_items = TaggedItem.objects.filter(tag__id=tag.id)
 	return render(request, 'images/tag.html', {'tag': tag, 'tagged_items': tagged_items})
 	
+def diagnosis(request, term):
+    diagnosis = get_object_or_404(Term, name=term)
+    cases = Case.objects.filter(diagnosis__name__exact=diagnosis.name)
+    return render(request, 'images/diagnosis.html', {'diagnosis': diagnosis, 'cases': cases})

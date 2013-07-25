@@ -1,0 +1,10 @@
+{% extends "images/base.html" %}
+
+{% block content %}
+<h2>{{ diagnosis }}</h2>
+{% for case in cases %}
+<div class="row-fluid">
+{% include "images/case.html" %}
+</div>
+{% endfor %}
+{% endblock %}

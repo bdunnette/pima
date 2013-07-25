@@ -11,6 +11,6 @@ urlpatterns = patterns('',
     url(r'^case/(.*)/', case, name="case"),
     url(r'^resource/(.*)/', resource, name="resource"),
     url(r'^tag/(.*)/', tag, name="tag"),
-
+    url(r'^dx/(.*)/', diagnosis, name="diagnosis"),
     url(r'^$', index, name="index"),
 )
