@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 for lab in labs:
                     print lab, labs[lab]
                     for case in enumerate(labs[lab]):
-                        case_title = labs[lab][case[1]][1].strip(" '").title()
+                        case_title = labs[lab][case[1]][1].strip(" '").replace("\\","")
                         case_id = labs[lab][case[1]][2].strip()
                         print case_title
                         if case_id in cases:
@@ -49,8 +49,8 @@ class Command(BaseCommand):
                             except ObjectDoesNotExist:
                                 print("Diagnosis not found, skipping...")
                             #print new_case.resources
-                            if created:
-                                new_case.save()
+                            new_case.title = case_title
+                            new_case.save()
                             case_info = cases[case_id]
                             for image in case_info:
                                 print image, case_info[image]
