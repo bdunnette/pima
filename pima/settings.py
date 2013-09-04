@@ -146,6 +146,12 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10
 }
 
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleBackend',
+    'social_auth.backends.OpenIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
