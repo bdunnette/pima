@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from taggit_autosuggest.managers import TaggableManager
 from disease_ontology.models import Term
 import uuid
-from django.contrib.contenttypes import generic
-from dublincore.models import QualifiedDublinCoreElement
 
 # Create your models here.
 class Resource(models.Model):
@@ -13,7 +11,6 @@ class Resource(models.Model):
 	description = models.TextField(null=True, blank=True)
 	diagnosis = models.ManyToManyField(Term, null=True, blank=True)
 	tags = TaggableManager(blank=True)
-	#dc_elements = generic.GenericRelation(QualifiedDublinCoreElement)
 
 	def __unicode__(self):
 		if self.description:

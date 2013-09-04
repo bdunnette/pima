@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     url(r'^images/', include('images.urls')),
+    url(r'^disease_ontology/', include('disease_ontology.urls')),
     url(r'^$', 'images.views.index'),
 )

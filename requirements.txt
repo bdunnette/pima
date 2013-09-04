@@ -3,6 +3,9 @@ django-bootstrap-toolkit
 django-taggit-autosuggest
 django-mptt 
 django-dag
+django-categories
+djangorestframework
+django-social-auth
 south
 # Uncomment if using MySQL
 #MySQL-python
