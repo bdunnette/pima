@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'social_auth.middleware.SocialAuthExceptionMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -113,6 +114,13 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+  "django.contrib.auth.context_processors.auth",
+  "django.core.context_processors.request",
+  "allauth.account.context_processors.account",
+  "allauth.socialaccount.context_processors.socialaccount",
 )
 
 INSTALLED_APPS = (
@@ -139,6 +147,11 @@ INSTALLED_APPS = (
     #'categories',
     'categories.editor',
     #'dublincore',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.google',
 )
 
 REST_FRAMEWORK = {
@@ -147,10 +160,15 @@ REST_FRAMEWORK = {
 }
 
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.google.GoogleBackend',
-    'social_auth.backends.OpenIDBackend',
     'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+SOCIALACCOUNT_PROVIDERS = \
+    { 'google':
+        { 'SCOPE': ['https://www.googleapis.com/auth/userinfo.profile'],
+          'AUTH_PARAMS': { 'access_type': 'online' } }}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

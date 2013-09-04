@@ -25,13 +25,14 @@
             <a class="brand" href="{{ URL_PREFIX }}">PImA - The Pathology Image Archive</a>
             <ul class="nav">
                 <li><a href="{% url 'index' %}" class="">Home</a></li>
+		<li>{% load socialaccount %}{% load account %}<a href="{% provider_login_url "google" %}">Google</a></li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="container">
-
+    
     {% bootstrap_messages %}
 
     {% block content %}{% endblock %}

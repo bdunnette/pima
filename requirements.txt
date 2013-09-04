@@ -5,7 +5,7 @@ django-mptt
 django-dag
 django-categories
 djangorestframework
-django-social-auth
+django-allauth
 south
 # Uncomment if using MySQL
 #MySQL-python
