@@ -3,6 +3,17 @@ from django.shortcuts import render, get_object_or_404
 from images.models import Case, Resource
 from disease_ontology.models import Term
 from taggit.models import Tag, TaggedItem
+from images.serializers import CaseSerializer, ResourceSerializer
+
+from rest_framework import viewsets
+
+class CaseViewSet(viewsets.ModelViewSet):
+	queryset = Case.objects.all()
+	serializer_class = CaseSerializer
+
+class ResourceViewSet(viewsets.ModelViewSet):
+	queryset = Resource.objects.all()
+	serializer_class = ResourceSerializer
 
 def index(request):
 	case_list = Case.objects.order_by('title')
@@ -23,7 +34,7 @@ def tag(request, tag_name):
 	tag = get_object_or_404(Tag, name=tag_name)
 	tagged_items = TaggedItem.objects.filter(tag__id=tag.id)
 	return render(request, 'images/tag.html', {'tag': tag, 'tagged_items': tagged_items})
-	
+
 def diagnosis(request, term):
     diagnosis = get_object_or_404(Term, name=term)
     cases = Case.objects.filter(diagnosis__name__exact=diagnosis.name)
