@@ -1,3 +1,4 @@
+django-bootstrap3
 django-taggit-autosuggest
 django-categories
 djangorestframework
