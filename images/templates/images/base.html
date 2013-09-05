@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-{% load bootstrap_toolkit %}
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>PImA - The Pathology Image Archive</title>
 	<meta name="description" content="">
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/css/bootstrap.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	{% load bootstrap3 %}
+	{% bootstrap_css %}
     	{% block extra_head %}{% endblock %}
 </head>
 
@@ -35,13 +33,9 @@
 </div>
 
 <div class="container">
-    
-    {% bootstrap_messages %}
-
     {% block content %}{% endblock %}
-
 </div>
-
+{% bootstrap_javascript jquery=True %}
 </body>
 </html>
 
