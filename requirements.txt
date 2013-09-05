@@ -1,12 +1,11 @@
-django-jquery
-django-bootstrap-toolkit
 django-taggit-autosuggest
 django-categories
 djangorestframework
 django-allauth
 django-filebrowser
+pillow
 south
 # Uncomment if using MySQL
 #MySQL-python
 # Uncomment for Shibboleth
-git+git://github.com/Brown-University-Library/django-shibboleth-remoteuser.git
+#git+git://github.com/Brown-University-Library/django-shibboleth-remoteuser.git

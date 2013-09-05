@@ -13,5 +13,5 @@
 <a href="{% url 'resource' resource.id %}">{{ resource }}</a>
 {% endfor %}</p>
 
-<img src="{{ MEDIA_URL }}{{ resource.file }}" class="thumbnail">
+<img src="{{ resource.file.url }}" class="thumbnail">
 {% endblock %}

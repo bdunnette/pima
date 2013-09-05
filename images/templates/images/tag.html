@@ -1,12 +1,12 @@
 {% extends "images/base.html" %}
 
 {% block content %}
-<h2>{{ tag }}</h2>
+<div class="row"><h2>Assets tagged with <em>{{ tag }}</em></h2></div>
 {% for item in tagged_items %}
 <div class="row">
 <a href="{% url item.content_type.name item.content_object.id %}">{{ item.content_object }}
 {% if item.content_object.file %}
-<img src="{{ MEDIA_URL }}/{{ item.content_object.file }}" width=25% />
+<img src="{{ item.content_object.file.url }}" width=25% class="thumbnail" />
 {% endif %}
 </a>
 </div>

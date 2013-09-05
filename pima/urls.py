@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
+from django.conf import settings
 from filebrowser.sites import site
 
 # Uncomment the next two lines to enable the admin:
@@ -19,4 +21,4 @@ urlpatterns = patterns('',
     url(r'^disease_ontology/', include('disease_ontology.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^$', 'images.views.index'),
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

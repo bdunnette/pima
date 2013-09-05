@@ -5,38 +5,33 @@
 	<meta charset="utf-8">
 	<title>PImA - The Pathology Image Archive</title>
 	<meta name="description" content="">
-	{% bootstrap_stylesheet_tag %}
-	{% bootstrap_stylesheet_tag "responsive" %}
-	<style type="text/css">
-        body {
-            padding-top: 60px;
-        }
-	</style>
-	<script src="{{ STATIC_URL }}js/jquery.js"></script>
-	{% bootstrap_javascript_tag %}
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/css/bootstrap.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"></script>
     	{% block extra_head %}{% endblock %}
 </head>
 
 <body>
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="{{ URL_PREFIX }}">PImA - The Pathology Image Archive</a>
-            <ul class="nav">
-                <li><a href="{% url 'index' %}" class="">Home</a></li>
-		<li class="pull-right">
-		    {% load socialaccount %}
-		    {% load account %}
-		    {% if user.is_authenticated %}
-			<a href="/accounts/logout">Logged in as {% user_display user %} - Logout</a>
-		    {% else %}
-			<a href={% provider_login_url "google" %}>Log in with Google</a>
-		    {% endif %}
-		</li>
-            </ul>
-        </div>
+<div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+	<a class="navbar-brand" href="{{ URL_PREFIX }}">PImA - The Pathology Image Archive</a>
     </div>
+    <ul class="nav navbar-nav">
+	<li><a href="{% url 'index' %}" class="">Home</a></li>
+	{% if user.is_staff %}
+	    <li><a href="/admin">Admin</a></li>
+	{% endif %}
+	<p class="navbar-text navbar-right">
+	    {% load socialaccount %}
+	    {% load account %}
+	    {% if user.is_authenticated %}
+		Logged in as {% user_display user %} - <a href="/accounts/logout">Logout</a>
+	    {% else %}
+		<a href={% provider_login_url "google" %}>Log in with Google</a>
+	    {% endif %}
+	</p>
+    </ul>
 </div>
 
 <div class="container">
